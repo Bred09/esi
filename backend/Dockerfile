@@ -1,14 +1,11 @@
 # Используем Node.js образ
-FROM node:22-alpine
+FROM node:alpine as build
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
 # Копируем package.json и package-lock.json
 COPY package*.json ./
-
-# Устанавливаем глобальные пакеты
-RUN npm install -g express dotenv
 
 # Устанавливаем зависимости
 RUN npm i

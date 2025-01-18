@@ -1,5 +1,5 @@
 # Используем Node.js образ
-FROM node:22-alpine
+FROM node:alpine as build
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
