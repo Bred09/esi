@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
+<!-- Styles -->
+		<!-- In the head of your document with your other CSS includes... -->
+	<!-- Video.js base CSS -->
+	<link href="/css/play/video-js.css" rel="stylesheet">
+	<!-- Tawog -->
+	<link rel="stylesheet" href="/css/play/videoplayer.css" type="text/css">
+	
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/play/style.css') %>" type="text/css">
+<!-- Title -->
+	<title><%= video.title %></title>
+<!-- main css files -->
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css"/>
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css"/>
+	<!-- layouts -->
+	<link href="<%= assetFingerprint('/css/header.css') %>" rel="stylesheet" type="text/css"/>
+	<link href="<%= assetFingerprint('/css/footer.css') %>" rel="stylesheet" type="text/css"/>
+</head>
+	<body>
+	<%- include("../layouts/header") %>
+		
+	<!-- Display -->
+	<div class="wrapper-box">
+		<div class="box">
+			<% if(!video) { %>
+				<h1 class="title-frm">Такой серии нет...</h1>
+			<% } else { %>
+			<!-- RIGHT -->
+			<div class="display">
+				<h1 class="title-frm"><%= video.title %></h1>
+				<h3 class="posted-frm">posted by <a class="blue-lnk" href="/character/<%= video.author %>"><%= video.author %></a></h3>
+				<div class="frame">
+					<video id="my-video" controls class="video-js vjs-gad vjs-default-skin vjs-big-play-centered" poster="<%= video.poster %>" preload="auto">
+						<source src="<%= video.path %><%= video.file_name %>" type="video/mp4">
+
+							<!-- JavaScript not supported -->
+							<p class="vjs-no-js">
+									To view this video please enable JavaScript, and consider upgrading to a
+									web browser that
+								<a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+							</p>
+					</video>
+				</div>
+			</div>
+			<div class="comments">
+				<div class="desc">
+					<div class="info-box">
+						<span><b>Description:</b> <%= video.description %></span>
+						<span class="views-box"><b><%= video.views %></b> views</span>
+					</div>
+					<div class="options">
+						<div class="add-comment">
+							<span><b>add a comment</b></span>
+							<br>
+							<textarea required name="comment" rows="6" class="body-cmt"></textarea>
+							<br>
+							<button onclick="comingSoon()" class="btn green-btn add-cmt">Add comment</button>
+						</div>
+						<div class="lds">
+							<div class="likes-dis">
+								<div><img class="like like-btn" src="/media/img/like.svg" alt="likes"><span class="like-count"><%= video.likes %></span></div>
+								<div><img class="dislike dislike-btn" src="/media/img/dislike.svg" alt="dislikes"><span class="dislike-count"><%= video.dislikes %></span></div>
+							</div>
+							<div class="share">
+								<span>SHARE TO</span>
+								<p onclick="comingSoon()">
+									<a href="#"><img src="/media/img/vk.png" alt=""></a>
+									<a href="#"><img src="/media/img/earth.svg" alt=""></a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+
+				<h3 class="messages">Comments (<span class="cmtCount"><%= comments.length %></span>):</h3>
+				<% comments.forEach(function(cmt) { %>
+					<div class="comment-box">
+						<div class="comment">
+							<a href="/character/<%= cmt.login %>">
+								<div>
+									<p class="author-cmt">
+										<div class="avatar-frame <%= cmt.role %>">
+											<img class="avatar" src="<%= cmt.avatar %>" alt="Avatar" />
+										</div>
+										<br>
+										<%= cmt.login %>
+									</p>
+								</div>
+							</a>
+							<div class="lt"></div><div class="body"><%= cmt.body %></div>
+							<div class="l-d" onclick="comingSoon()">
+								<p>
+									<img class="like-cmnt-btn" src="/media/img/like.svg" alt="likes"> <span class="like-c-count"><%= cmt.likes %></span>
+									<img class="dislike-cmnt-btn" src="/media/img/dislike.svg" alt="dislikes"> <span class="dislike-c-count"><%= cmt.dislikes %></span>
+								</p>
+							</div>
+						</div>
+					</div>
+				<% }); %>
+			</div>
+			<% } %>
+
+			<!-- LEFT -->
+			<div class="similar">
+				<span class="rec"><img class="camera" src="/media/img/camera.svg" alt="camera">VIDEOS YOU MIGHT LIKE TOO</span>
+				<div class="wrapper">
+				<% data.forEach(function(videos) { %>
+					<div class="video-box">
+						<a href="/video/<%= videos.id %>" class="video-link">
+							<div class="video">
+								<img src="<%= videos.poster %>" class="poster" alr="<%= videos.title %>"></img>
+								<br>
+								<br>
+								<span class="title info"><%= videos.title %></span><br>
+								<span class="posted info">
+									<object>
+										posted by <a href="/character/<%= videos.author %>" class="blue-lnk"><%= videos.author %></a>
+									</object><br>
+								</span>
+								<span class="views info"><%= videos.views %> views</span>
+							</div>
+						</a>
+					</div>
+				<% }); %>
+				</div>
+				<div class="more-btn-box"><button class="btn green-btn more">more videos</button></div>
+			</div>
+		</div>
+	</div>
+
+
+	<%- include("../layouts/footer") %>
+
+<!-- Scripts -->
+ <script>
+ </script>
+<script src="/js/video/play/video.min.js"></script>
+<script src="/js/video/play/videoplayer.js"></script>
+
+	<div class="allow-box" style="position: fixed; top: 10px; right: 10px;"></div>
+		<script src="/js/ion.sound.min.js"></script>
+	<script src="/js/video/play/script.js"></script>
+	</body>
+</html>

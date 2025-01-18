@@ -1,0 +1,7 @@
+.reset-form a {
+	text-align: center;
+}
+
+.find-btn{
+	grid-column: 1/3;
+}

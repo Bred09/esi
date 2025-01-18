@@ -1,0 +1,7 @@
+.create-form a {
+	text-align: center;
+}
+
+.create-btn{
+	grid-column: 1/3;
+}

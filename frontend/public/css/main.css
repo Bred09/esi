@@ -1,0 +1,26 @@
+a {
+  color: #000;
+  text-decoration: none;
+}
+a:hover {
+  cursor: url("/media/cursore/cursor.png"), auto;
+}
+
+/*убирает стандартную обводку файрфокс и сафари*/
+input, textarea {
+  outline:none;
+  resize: vertical
+}
+
+body{
+  margin: 0;
+  padding: 0;
+}
+html {
+  margin: 0;
+  padding: 0;
+}
+*, html{
+  cursor: url("/media/cursore/cursor.png"), auto !important;
+  font-family: sans-serif;
+}

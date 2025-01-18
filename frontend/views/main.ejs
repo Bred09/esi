@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="/media/favicon.svg">
+	<!-- Styles -->
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/main/wrapper.css') %>" type="text/css" />
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/main/style.css') %>" type="text/css" />
+	<title>Elmore Stream IT</title>
+	<!-- main css files -->
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css" />
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css" />
+	<!-- layouts -->
+	<link href="<%= assetFingerprint('/css/header.css') %>" rel="stylesheet" type="text/css" />
+	<link href="<%= assetFingerprint('/css/footer.css') %>" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<%- include("layouts/header") %>
+		<!-- туловище сайта -->
+		<div class="wrapper-box">
+			<h1>Suggested</h1>
+
+			<div class='wrapper'>
+				<% if(data.status == "ok") { %>
+				<% data.forEach(function(user) { %>
+					<div class="video-box">
+						<a href="/play/<%= user.season %>/<%= user.episode %><%= user.skip %>" class="video-link">
+							<div class="video">
+								<img src="<%= user.poster %>"
+									class="poster" alr="<%= user.title %>"></img>
+								<br>
+								<br>
+								<span class="title info">
+									<%= user.title %>
+								</span><br>
+								<span class="posted info">
+									<object>
+										posted by <a href="/character/<%= user.author %>" class="blue-lnk">
+											<%= user.author %>
+										</a>
+									</object><br>
+								</span>
+								<span class="views info">
+									<%= user.views %> views
+								</span>
+							</div>
+						</a>
+					</div>
+					<% }); %>
+					<% } else { %>
+						<h2><%= data.error %></h2>
+					<% } %>
+			</div>
+			<button class="btn green-btn more">more videos</button>
+		</div>
+		<%- include("layouts/footer") %>
+			<script src="/js/main/script.js"></script>
+</body>
+
+</html>

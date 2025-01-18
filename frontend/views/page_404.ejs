@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404</title>
+
+	<!-- Styles -->
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/main/wrapper.css') %>" type="text/css" />
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/main/style.css') %>" type="text/css" />
+	<title>Elmore Stream IT</title>
+	<!-- main css files -->
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/main.css') %>" type="text/css" />
+	<link rel="stylesheet" href="<%= assetFingerprint('/css/btns.css') %>" type="text/css" />
+	<!-- layouts -->
+	<link href="<%= assetFingerprint('/css/header.css') %>" rel="stylesheet" type="text/css" />
+	<link href="<%= assetFingerprint('/css/footer.css') %>" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<%- include("layouts/header") %>
+    <style>
+        h1{
+            text-align: center;
+            margin-top: 100px;
+            font-size: 50px;
+        }
+
+        body{
+            background-color: #2d2d2d;
+            color: #fff;
+        }
+    </style>
+    <div>
+        <h1>404 page not found</h1>
+    </div>
+</body>
+</html>

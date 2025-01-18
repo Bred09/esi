@@ -1,0 +1,22 @@
+
+.footer{
+  background: #fdcf0b;
+  padding: 0 4%;
+}
+
+.grid-footer {
+  display: grid;
+  grid: 1fr / repeat(auto-fit, minmax(200px, 1fr));
+  align-items: center;
+}
+
+.tawog img {
+  width: 100%;
+}
+
+.en {
+  text-align: right;
+}
+.ru {
+  text-align: left;
+}
