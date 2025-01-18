@@ -7,6 +7,9 @@ WORKDIR /app
 # Копируем package.json и package-lock.json
 COPY package*.json ./
 
+# Устанавливаем глобальные пакеты
+RUN npm install -g express dotenv
+
 # Устанавливаем зависимости
 RUN npm i
 
