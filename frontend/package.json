@@ -1,5 +1,5 @@
 {
-  "name": "esi_frontend",
+  "name": "frontend",
   "version": "1.0.0",
   "main": "app.js",
   "type": "module",

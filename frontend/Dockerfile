@@ -1,11 +1,10 @@
 # Используем Node.js образ
-FROM node:alpine as build
+FROM node:lts-alpine
 
-# Устанавливаем рабочую директорию
 WORKDIR /app
 
 # Копируем package.json и package-lock.json
-COPY package*.json ./
+COPY package.json ./
 
 # Устанавливаем зависимости
 RUN npm install

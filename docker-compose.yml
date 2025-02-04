@@ -4,6 +4,7 @@ networks:
 services:
   nginx:
     image: nginx:alpine
+    container_name: nginx
     ports:
       - "80:80"
     volumes:
@@ -12,26 +13,22 @@ services:
       - backend
       - frontend
     networks:
-      esi:
+      - esi
 
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
+    container_name: backend
     ports:
-      - "9000:9000"
-    volumes:
-      - ./backend:/app
+      - "9000:9000" # Обязательно укажите порт, чтобы Nginx мог подключиться
     networks:
-      esi:
-      
+      - esi
+
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+    container_name: frontend
     ports:
-      - "3000:3000"
-    volumes:
-      - ./frontend:/app
+      - "3000:3000" # Убедитесь, что порт совпадает с тем, который используется в Nginx
     networks:
-      esi:
+      - esi
