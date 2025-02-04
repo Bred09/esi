@@ -1,0 +1,5 @@
+backend/node_modules
+backend/src/tawog
+frontend/node_modules
+.git
+.gitignore

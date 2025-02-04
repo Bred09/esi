@@ -10,8 +10,19 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
+      - mysql
       - backend
       - frontend
+    networks:
+      - esi
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    env_file:
+      - backend/.env
+    ports:
+      - "3306:3306"
     networks:
       - esi
 
