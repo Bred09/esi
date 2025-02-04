@@ -23,6 +23,8 @@ services:
       - backend/.env
     ports:
       - "3306:3306"
+    volumes:
+      - ./mysql:/home
     networks:
       - esi
 
