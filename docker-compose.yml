@@ -1,5 +1,10 @@
-networks:
-  esi:
+volumes:
+  media: # Том для медиафайлов
+    driver: local
+    driver_opts:
+      type: bind
+      o: bind
+      device: ./media # Локальная папка на хосте
 
 services:
   nginx:
@@ -9,8 +14,8 @@ services:
       - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./media:/var/www/media # Монтируем папку media
     depends_on:
-      - mysql
       - backend
       - frontend
     networks:
@@ -23,9 +28,9 @@ services:
       - backend/.env
     ports:
       - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password --bind-address=0.0.0.0
     volumes:
       - ./mysql:/home
-    command: --default-authentication-plugin=mysql_native_password --bind-address=0.0.0.0
     networks:
       - esi
 
@@ -34,7 +39,9 @@ services:
       context: ./backend
     container_name: backend
     ports:
-      - "9000:9000" # Обязательно укажите порт, чтобы Nginx мог подключиться
+      - "9000:9000"
+    volumes:
+      - ./media:/var/www/media # Монтируем ту же папку для доступа к медиафайлам
     networks:
       - esi
 
@@ -43,6 +50,10 @@ services:
       context: ./frontend
     container_name: frontend
     ports:
-      - "3000:3000" # Убедитесь, что порт совпадает с тем, который используется в Nginx
+      - "3000:3000"
     networks:
       - esi
+
+networks:
+  esi:
+    driver: bridge

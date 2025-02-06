@@ -1,3 +1,2 @@
-backend/node_modules
-backend/src/tawog
-frontend/node_modules
+media
+*/node_modules
